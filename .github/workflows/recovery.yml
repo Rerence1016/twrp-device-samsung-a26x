@@ -18,6 +18,10 @@ jobs:
     steps:
        - name: Checkout
          uses: actions/checkout@master
+
+
+       - name: Free Disk Space (Ubuntu)
+         uses: jlumbroso/free-disk-space@v1.3.1
          
 
        - name: Initializing environment
@@ -65,7 +69,6 @@ jobs:
        - name: Build
          run: |
               cd work
-              sudo rm -rf /tmp/* /var/tmp/* /var/log/*
               . build/envsetup.sh &&lunch twrp_$DEVICE-eng &&export ALLOW_MISSING_DEPENDENCIES=true && mka $TARGET
 
        - name: Save
