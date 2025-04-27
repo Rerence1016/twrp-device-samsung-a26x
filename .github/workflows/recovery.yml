@@ -27,6 +27,8 @@ jobs:
             git config --global user.name ""
             git config --global user.email ""
 
+            sudo rm -rf /opt/hostedtoolcache
+            npm cache clean --force
             sudo apt-get remove --purge -y landscape-common snapd
 
             sudo apt-get autoremove -y         
@@ -52,7 +54,6 @@ jobs:
 
        - name: Sync recovery source and device tree
          run: |
-             cd /mnt
              mkdir work
              cd work
              sudo rm -rf /tmp/*
