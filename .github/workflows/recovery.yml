@@ -26,11 +26,7 @@ jobs:
 
        - name: Initializing environment
          run: |
-            docker rmi `docker images -q`
             
-            git config --global user.name ""
-            git config --global user.email ""
-
             sudo rm -rf /opt/hostedtoolcache
             npm cache clean --force
             sudo apt-get remove --purge -y landscape-common snapd
@@ -55,6 +51,9 @@ jobs:
             sudo -E apt-get -qq install bc build-essential zip curl libstdc++6 git wget python3 gcc clang libssl-dev repo rsync flex curl  bison aria2
             sudo curl --create-dirs -L -o /usr/local/bin/repo -O -L https://storage.googleapis.com/git-repo-downloads/repo
             sudo chmod a+rx /usr/local/bin/repo
+            git config --global user.name ""
+            git config --global user.email ""
+
 
        - name: Sync recovery source and device tree
          run: |
