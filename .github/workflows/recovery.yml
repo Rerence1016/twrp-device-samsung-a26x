@@ -27,56 +27,7 @@ jobs:
             git config --global user.name ""
             git config --global user.email ""
 
-            sudo apt-get remove --purge -y aisleriot \
-                                           brltty \
-                                           duplicity \
-                                           gnome-contacts \
-                                           gnome-mahjongg \
-                                           gnome-mines \
-                                           gnome-orca \
-                                           gnome-sudoku \
-                                           gnome-video-effects \
-                                           landscape-common \
-                                           libreoffice-avmedia-backend-gstreamer \
-                                           libreoffice-base-core \
-                                           libreoffice-calc \
-                                           libreoffice-common \
-                                           libreoffice-core \
-                                           libreoffice-draw \
-                                           libreoffice-gnome \
-                                           libreoffice-gtk \
-                                           libreoffice-impress \
-                                           libreoffice-math \
-                                           libreoffice-ogltrans \
-                                           libreoffice-pdfimport \
-                                           libreoffice-style-galaxy \
-                                           libreoffice-style-human \
-                                           libreoffice-writer \
-                                           libsane \
-                                           libsane-common \
-                                           python3-uno \
-                                           rhythmbox \
-                                           rhythmbox-plugins \
-                                           sane-utils \
-                                           shotwell \
-                                           shotwell-common \
-                                           totem \
-                                           totem-common \
-                                           totem-plugins \
-                                           printer-driver-brlaser \
-                                           printer-driver-foo2zjs \
-                                           printer-driver-foo2zjs-common \
-                                           printer-driver-m2300w \
-                                           printer-driver-ptouch \
-                                           printer-driver-splix \
-                                           snapd \
-                                           fwupd \
-                                           thunderbird \
-                                           remmina \
-                                           cheese \
-                                           transmission \
-                                           simple-scan \
-                                           gnome-initial-setup \
+            sudo apt-get remove --purge -y landscape-common snapd
 
             sudo apt-get autoremove -y         
             
@@ -101,8 +52,10 @@ jobs:
 
        - name: Sync recovery source and device tree
          run: |
+             cd /mnt
              mkdir work
              cd work
+             sudo rm -rf /tmp/*
              repo init -u $MANIFEST --depth=1
              repo sync -c -j4 --force-sync --no-clone-bundle --no-tags
              git clone $DT_LINK --depth=1 --single-branch $DT_PATH
