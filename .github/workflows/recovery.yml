@@ -93,6 +93,8 @@ jobs:
          run: |
               echo "Current folder is: $(pwd)"
               cd /home/runner/work/twrp-device-samsung-a26x/twrp-device-samsung-a26x/work/
+              echo "Switching directory..."
+              echo "Uploading: recovery.img"
          with:
            name: twrp-recovery-img
            path: out/target/product/a26x/recovery.img
@@ -103,6 +105,8 @@ jobs:
          run: |
               echo "Current folder is: $(pwd)"
               cd /home/runner/work/twrp-device-samsung-a26x/twrp-device-samsung-a26x/work/
+              echo "Switching directory..."
+              echo "Uploading: recovery.tar"
          with:
            name: twrp-recovery-tar
            path: out/target/product/a26x/recovery.tar
