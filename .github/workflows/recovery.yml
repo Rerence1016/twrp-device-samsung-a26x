@@ -1,15 +1,6 @@
 name: Building recovery
 
 on:
-#  release:
-#    types: [published]
-#  push:
-#    branches:
-#      - master
-#    paths:
-#      - '.config'
-#  schedule:
-#    - cron: 0 8 * * 5
   workflow_dispatch:
 
 env:
@@ -36,13 +27,66 @@ jobs:
             git config --global user.name ""
             git config --global user.email ""
 
-            sudo apt-get remove --purge -y '^dotnet-.*'
-            sudo apt-get remove --purge -y '^llvm-.*'
-            sudo apt-get remove --purge -y '^php-.*'
-            sudo apt-get remove --purge -y '^mongodb-.*'
-            sudo apt-get remove --purge -y '^mysql-.*'
-            sudo apt-get remove --purge -y '^postgresql-.*'
-            sudo apt-get remove --purge -y azure-cli google-cloud-sdk
+            sudo apt-get remove --purge -y aisleriot \
+                                           brltty \
+                                           duplicity \
+                                           gnome-contacts \
+                                           gnome-mahjongg \
+                                           gnome-mines \
+                                           gnome-orca \
+                                           gnome-sudoku \
+                                           gnome-video-effects \
+                                           landscape-common \
+                                           libreoffice-avmedia-backend-gstreamer \
+                                           libreoffice-base-core \
+                                           libreoffice-calc \
+                                           libreoffice-common \
+                                           libreoffice-core \
+                                           libreoffice-draw \
+                                           libreoffice-gnome \
+                                           libreoffice-gtk \
+                                           libreoffice-impress \
+                                           libreoffice-math \
+                                           libreoffice-ogltrans \
+                                           libreoffice-pdfimport \
+                                           libreoffice-style-galaxy \
+                                           libreoffice-style-human \
+                                           libreoffice-writer \
+                                           libsane \
+                                           libsane-common \
+                                           python3-uno \
+                                           rhythmbox \
+                                           rhythmbox-plugins \
+                                           sane-utils \
+                                           shotwell \
+                                           shotwell-common \
+                                           totem \
+                                           totem-common \
+                                           totem-plugins \
+                                           printer-driver-brlaser \
+                                           printer-driver-foo2zjs \
+                                           printer-driver-foo2zjs-common \
+                                           printer-driver-m2300w \
+                                           printer-driver-ptouch \
+                                           printer-driver-splix \
+                                           snapd \
+                                           fwupd \
+                                           thunderbird \
+                                           remmina \
+                                           cheese \
+                                           transmission \
+                                           simple-scan \
+                                           ubuntu-web-launchers \
+                                           gnome-initial-setup \
+                                           '^dotnet-.*' \
+                                           '^llvm-.*' \
+                                           '^php-.*' \
+                                           '^mongodb-.*' \
+                                           '^mysql-.*' \
+                                           '^postgresql-.*' \
+                                           azure-cli \
+                                           google-cloud-sdk
+
             sudo apt-get autoremove -y         
             
             sudo rm -rf /usr/share/dotnet
@@ -58,6 +102,7 @@ jobs:
             sudo rm -rf "$AGENT_TOOLSDIRECTORY"
             
             sudo -E apt-get clean
+            df -h
             sudo -E apt-get -qq update
             sudo -E apt-get -qq install bc build-essential zip curl libstdc++6 git wget python3 gcc clang libssl-dev repo rsync flex curl  bison aria2
             sudo curl --create-dirs -L -o /usr/local/bin/repo -O -L https://storage.googleapis.com/git-repo-downloads/repo
