@@ -68,7 +68,9 @@ jobs:
              
        - name: Build
          run: |
+              cd work
               . build/envsetup.sh &&lunch twrp_$DEVICE-eng &&export ALLOW_MISSING_DEPENDENCIES=true && mka $TARGET
+              cd /home/runner/work/twrp-device-samsung-a22x/twrp-device-samsung-a22x/work/
 
        - name: Upload recovery.img
          if: always()
