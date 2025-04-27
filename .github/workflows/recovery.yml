@@ -9,7 +9,6 @@ env:
   DT_LINK: https://github.com/Rerence1016/twrp-device-samsung-a26x/
   DT_PATH: device/samsung/a26x
   TARGET: recoveryimage
-  FULL_PATH: /home/runner/work/twrp-device-samsung-a26x/twrp-device-samsung-a26x/work/out/target/product/a26x
   OUTPUT: recovery.tar
 
 jobs:
@@ -19,7 +18,6 @@ jobs:
     steps:
        - name: Checkout
          uses: actions/checkout@master
-
 
        - name: Free Disk Space (Ubuntu)
          uses: jlumbroso/free-disk-space@v1.3.1
@@ -56,6 +54,21 @@ jobs:
             git config --global user.name ""
             git config --global user.email ""
 
+       - name: Cache repo and source
+         uses: actions/cache@v4
+         id: cache-repo
+         with:
+         path: |
+               work/.repo
+               work/platform_manifest_twrp_aosp
+         key: ${{ runner.os }}-twrp-repo-${{ env.DEVICE }}
+
+       - name: Cache out directory
+         uses: actions/cache@v4
+         with:
+         path: |
+               work/out
+         key: ${{ runner.os }}-twrp-out-${{ env.DEVICE }}-${{ github.run_id }}
 
        - name: Sync recovery source and device tree
          run: |
@@ -65,41 +78,24 @@ jobs:
              repo sync -c -j4 --force-sync --no-clone-bundle --no-tags --optimized-fetch --prune --current-branch
              git clone $DT_LINK --depth=1 --single-branch $DT_PATH
              sudo chmod a+rx $DT_PATH/mkbootimg
-             
-             
+
        - name: Build
          run: |
               cd work
-              . build/envsetup.sh &&lunch twrp_$DEVICE-eng &&export ALLOW_MISSING_DEPENDENCIES=true && mka $TARGET
-
-       - name: DEBUG - Check if recovery.img and recovery.tar exist
-         run: |
-              echo "Current directory is: $(pwd)"
-              echo "Switching to: $FULL_PATH"
-              cd /home/runner/work/twrp-device-samsung-a26x/twrp-device-samsung-a26x/work/
-              echo "Checking for recovery files..."
-              ls -alh out/target/product/a26x/
-              if [ ! -f out/target/product/a26x/recovery.img ]; then
-                echo "recovery.img not found!"
-                exit 1
-              else echo "recovery.img found!"
-              fi
-              if [ ! -f out/target/product/a26x/recovery.tar ]; then
-                echo "recovery.tar not found!"
-                exit 1
-              else echo "recovery.tar found!"
-              fi
+              . build/envsetup.sh && lunch twrp_$DEVICE-eng && export ALLOW_MISSING_DEPENDENCIES=true && mka $TARGET
+              echo "Current size of out/ is:"
+              du -sh out
 
        - name: Upload recovery.img
          if: always()
          uses: actions/upload-artifact@v4
          with:
            name: twrp-recovery-img
-           path: $FULL_PATH/recovery.img
+           path: /home/runner/work/twrp-device-samsung-a26x/twrp-device-samsung-a26x/work/out/target/product/a26x/recovery.img
 
        - name: Upload recovery.tar
          if: always()
          uses: actions/upload-artifact@v4
          with:
            name: twrp-recovery-tar
-           path: $FULL_PATH/recovery.tar
+           path: /home/runner/work/twrp-device-samsung-a26x/twrp-device-samsung-a26x/work/out/target/product/a26x/recovery.tar
