@@ -53,9 +53,9 @@ TARGET_BOARD_PLATFORM := s5e8835
 TARGET_BOARD_PLATFORM_GPU := mali-g68
 
 # Kernel
-TARGET_PREBUILT_KERNEL := device/samsung/a22x/prebuilt/kernel
-TARGET_PREBUILT_DTB := device/samsung/a22x/prebuilt/dtb
-BOARD_PREBUILT_DTBOIMAGE := device/samsung/a22x/prebuilt/recovery_dtbo
+TARGET_PREBUILT_KERNEL := device/samsung/a26x/prebuilt/kernel
+TARGET_PREBUILT_DTB := device/samsung/a26x/prebuilt/dtb
+BOARD_PREBUILT_DTBOIMAGE := device/samsung/a26x/prebuilt/recovery_dtbo
 BOARD_INCLUDE_RECOVERY_DTBO := true
 TARGET_KERNEL_ARCH := arm64
 

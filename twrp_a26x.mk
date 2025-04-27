@@ -25,7 +25,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, vendor/twrp/config/common.mk)
 
 # Inherit device configuration
-$(call inherit-product, device/samsung/a22x/device.mk)
+$(call inherit-product, device/samsung/a26x/device.mk)
 
 # Charger
 PRODUCT_PACKAGES += \
