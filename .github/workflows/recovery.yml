@@ -76,16 +76,7 @@ jobs:
                                            cheese \
                                            transmission \
                                            simple-scan \
-                                           ubuntu-web-launchers \
                                            gnome-initial-setup \
-                                           '^dotnet-.*' \
-                                           '^llvm-.*' \
-                                           '^php-.*' \
-                                           '^mongodb-.*' \
-                                           '^mysql-.*' \
-                                           '^postgresql-.*' \
-                                           azure-cli \
-                                           google-cloud-sdk
 
             sudo apt-get autoremove -y         
             
