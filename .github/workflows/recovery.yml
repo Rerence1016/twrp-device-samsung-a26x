@@ -57,7 +57,7 @@ jobs:
              mkdir work
              cd work
              repo init -u $MANIFEST --depth=1
-             repo sync -c -j4 --force-sync --no-clone-bundle --no-tags --optimized-fetch --prune --current-branch
+             repo sync -c -j4 --no-clone-bundle --no-tags --optimized-fetch --prune --current-branch
              git clone $DT_LINK --depth=1 --single-branch $DT_PATH
              sudo chmod a+rx $DT_PATH/mkbootimg
              
