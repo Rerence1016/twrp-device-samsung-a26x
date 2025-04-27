@@ -68,6 +68,8 @@ jobs:
          with:
             path: work/out
             key: ${{ runner.os }}-twrp-out-${{ env.DEVICE }}-${{ github.run_id }}
+            restore-keys: |
+              ${{ runner.os }}-twrp-out-${{ env.DEVICE }}-${{ runner.os }}-twrp-out-
 
        - name: Sync recovery source and device tree
          run: |
