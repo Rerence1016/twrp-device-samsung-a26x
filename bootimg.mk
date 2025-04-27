@@ -13,6 +13,6 @@ $(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTIMG) $(recovery_ramdisk) $(recovery_k
 	$(hide) $(MKBOOTIMG) $(INTERNAL_RECOVERYIMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $@
 	@echo "----- Lying about SEAndroid state to Samsung bootloader ------"
 	$(hide) echo -n "SEANDROIDENFORCE" >> $@
-	@echo "Made recovery image: $@"
+	@echo "Made recovery image: $(CURDIR)/$@"
 	$(hide) tar -C $(PRODUCT_OUT) -c recovery.img > $(FLASH_IMAGE_TARGET)
 	@echo "Made flashable $(FLASH_IMAGE_TARGET): $@"

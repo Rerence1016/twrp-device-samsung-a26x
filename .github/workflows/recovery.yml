@@ -70,7 +70,8 @@ jobs:
          run: |
               cd work
               . build/envsetup.sh &&lunch twrp_$DEVICE-eng &&export ALLOW_MISSING_DEPENDENCIES=true && mka $TARGET
-              cd /home/runner/work/twrp-device-samsung-a22x/twrp-device-samsung-a22x/work/
+              cd /home/runner/work/twrp-device-samsung-a26x/twrp-device-samsung-a26x/work/
+              ls -ah out/target/product/a26x/
 
        - name: Upload recovery.img
          if: always()
