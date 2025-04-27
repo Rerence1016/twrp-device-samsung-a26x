@@ -61,13 +61,13 @@ jobs:
             path: |
                work/.repo
                work/platform_manifest_twrp_aosp
-         key: ${{ runner.os }}-twrp-repo-${{ env.DEVICE }}
+            key: ${{ runner.os }}-twrp-repo-${{ env.DEVICE }}
 
        - name: Cache out directory
          uses: actions/cache@v4
          with:
             path: work/out
-         key: ${{ runner.os }}-twrp-out-${{ env.DEVICE }}-${{ github.run_id }}
+            key: ${{ runner.os }}-twrp-out-${{ env.DEVICE }}-${{ github.run_id }}
 
        - name: Sync recovery source and device tree
          run: |
