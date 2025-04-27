@@ -71,18 +71,30 @@ jobs:
               cd work
               . build/envsetup.sh &&lunch twrp_$DEVICE-eng &&export ALLOW_MISSING_DEPENDENCIES=true && mka $TARGET
               cd /home/runner/work/twrp-device-samsung-a26x/twrp-device-samsung-a26x/work/
-              ls -ah out/target/product/a26x/
+
+       - name: DEBUG - Check if recovery.img and recovery.tar exist
+         run: |
+              echo "Checking for recovery files..."
+              ls -alh out/target/product/a26x/
+              if [ ! -f out/target/product/a26x/recovery.img ]; then
+                echo "recovery.img not found!"
+                exit 1
+              fi
+              if [ ! -f out/target/product/a26x/recovery.tar ]; then
+                echo "recovery.tar not found!"
+                exit 1
+              fi
 
        - name: Upload recovery.img
          if: always()
-         uses: actions/upload-pages-artifact@v3
+         uses: actions/upload-artifact@v3
          with:
            name: twrp-recovery-img
            path: out/target/product/a26x/recovery.img
 
        - name: Upload recovery.tar
          if: always()
-         uses: actions/upload-pages-artifact@v3
+         uses: actions/upload-artifact@v3
          with:
            name: twrp-recovery-tar
            path: out/target/product/a26x/recovery.tar
