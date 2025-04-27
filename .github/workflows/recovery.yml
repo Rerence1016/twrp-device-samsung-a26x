@@ -24,7 +24,7 @@ jobs:
          uses: jlumbroso/free-disk-space@v1.3.1
          
 
-       - name: Initializing environment
+       - name: Additional Storage Clearing
          run: |
             
             sudo rm -rf /opt/hostedtoolcache
@@ -45,8 +45,9 @@ jobs:
             sudo rm -rf "/usr/local/share/boost" 
             sudo rm -rf "$AGENT_TOOLSDIRECTORY"
             
+       - name: Initializing environment
+         run: |
             sudo -E apt-get clean
-            df -h
             sudo -E apt-get -qq update
             sudo -E apt-get -qq install bc build-essential zip curl libstdc++6 git wget python3 gcc clang libssl-dev repo rsync flex curl  bison aria2
             sudo curl --create-dirs -L -o /usr/local/bin/repo -O -L https://storage.googleapis.com/git-repo-downloads/repo
@@ -67,12 +68,18 @@ jobs:
              
        - name: Build
          run: |
-              cd work
               . build/envsetup.sh &&lunch twrp_$DEVICE-eng &&export ALLOW_MISSING_DEPENDENCIES=true && mka $TARGET
 
-       - name: Save
+       - name: Upload recovery.img
+         if: always()
          uses: actions/upload-pages-artifact@v3
          with:
-            name: twrp-recovery
-            path: /home/runner/work/twrp-device-samsung-a26x/twrp-device-samsung-a26x/work/out/target/product/a26x/recovery.tar
-            retention-days: 5
+           name: twrp-recovery-img
+           path: out/target/product/a26x/recovery.img
+
+       - name: Upload recovery.tar
+         if: always()
+         uses: actions/upload-pages-artifact@v3
+         with:
+           name: twrp-recovery-tar
+           path: out/target/product/a26x/recovery.tar
