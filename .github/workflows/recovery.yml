@@ -57,7 +57,7 @@ jobs:
              mkdir work
              cd work
              repo init -u $MANIFEST --depth=1
-             repo sync -c -j4 --no-clone-bundle --no-tags --optimized-fetch --prune --current-branch
+             repo sync -c -j4 --force-sync --no-clone-bundle --no-tags --optimized-fetch --prune --current-branch
              git clone $DT_LINK --depth=1 --single-branch $DT_PATH
              sudo chmod a+rx $DT_PATH/mkbootimg
              
@@ -65,6 +65,7 @@ jobs:
        - name: Build
          run: |
               cd work
+              sudo rm -rf /tmp/* /var/tmp/* /var/log/*
               . build/envsetup.sh &&lunch twrp_$DEVICE-eng &&export ALLOW_MISSING_DEPENDENCIES=true && mka $TARGET
 
        - name: Save
