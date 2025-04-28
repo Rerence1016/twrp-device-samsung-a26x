@@ -98,9 +98,9 @@ jobs:
            name: twrp-recovery-img
            path: /home/runner/work/twrp-device-samsung-a26x/twrp-device-samsung-a26x/work/out/target/product/a26x/recovery.img
 
-       - name: Upload recovery.tar
+       - name: Upload twrp-recovery-a26x.tar
          if: success()
          uses: actions/upload-artifact@v4
          with:
            name: twrp-recovery-tar
-           path: /home/runner/work/twrp-device-samsung-a26x/twrp-device-samsung-a26x/work/out/target/product/a26x/recovery.tar
+           path: /home/runner/work/twrp-device-samsung-a26x/twrp-device-samsung-a26x/work/out/target/product/a26x/twrp-recovery-a26x.tar

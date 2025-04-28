@@ -1,6 +1,6 @@
 MKBOOTIMG := device/samsung/a26x/mkbootimg
 
-FLASH_IMAGE_TARGET ?= $(PRODUCT_OUT)/recovery.tar
+FLASH_IMAGE_TARGET ?= $(PRODUCT_OUT)/twrp-recovery-a26x.tar
 
 $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(BOOTIMAGE_EXTRA_DEPS)
 	$(call pretty,"Target boot image: $@")
