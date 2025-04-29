@@ -1,0 +1,24 @@
+#<src>                      	<mnt_point>    <type>    <mnt_flags and options>    <fs_mgr_flags>
+system				/system		erofs	 	rw			wait,logical
+system				/system		f2fs		rw			wait,logical
+system				/system		ext4		rw			wait,logical
+vendor				/vendor		erofs		rw			wait,logical
+product				/product	erofs		rw			wait,logical
+odm				/odm		erofs		rw			wait,logical
+/dev/block/by-name/boot     	/boot           emmc        	defaults    		recoveryonly
+/dev/block/by-name/recovery    	/recovery       emmc        	defaults    		recoveryonly
+
+/dev/block/by-name/userdata	/data		f2fs 		rw,noatime,nosuid,nodev,discard,usrquota,grpquota,fsync_mode=nobarrier,reserve_root=32768,resgid=5678	wait,length=-20480,fscompress
+
+/dev/block/by-name/cache       	/cache          ext4        	rw          		recoveryonly
+/dev/block/mmcblk0p1            /sdcard         sdfat       	defaults    		recoveryonly
+
+
+
+
+
+
+
+
+
+
