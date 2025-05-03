@@ -9,7 +9,6 @@ env:
   DT_LINK: https://github.com/Rerence1016/twrp-device-samsung-a26x/
   DT_PATH: device/samsung/a26x
   TARGET: recoveryimage
-  OUTPUT: recovery.tar
 
 jobs:
   build:
@@ -54,21 +53,6 @@ jobs:
             git config --global user.name ""
             git config --global user.email ""
 
-       - name: Restore cache repo and source
-         uses: actions/cache@v4
-         id: cache-repo
-         with:
-            path: |
-               work/.repo
-               work/platform_manifest_twrp_aosp
-            key: ${{ runner.os }}-twrp-repo-${{ env.DEVICE }}
-
-       - name: Restore cache out directory
-         uses: actions/cache@v4
-         with:
-            path: work/out
-            key: ${{ runner.os }}-twrp-out-${{ env.DEVICE }}
-
        - name: Sync recovery source and device tree
          run: |
              if [ ! -d "work"]; then
@@ -88,8 +72,6 @@ jobs:
          run: |
               cd work
               . build/envsetup.sh && lunch twrp_$DEVICE-eng && export ALLOW_MISSING_DEPENDENCIES=true && mka $TARGET
-              echo "Current size of out/ is:"
-              du -sh out
 
        - name: Upload recovery.img
          if: success()
