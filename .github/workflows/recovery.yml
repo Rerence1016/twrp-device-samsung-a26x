@@ -65,7 +65,8 @@ jobs:
        - name: Build
          run: |
               cd work
-              . build/envsetup.sh && lunch twrp_$DEVICE-eng && export ALLOW_MISSING_DEPENDENCIES=true && mka $TARGET
+              rm -rf out
+              . build/envsetup.sh && lunch twrp_$DEVICE-eng && export ALLOW_MISSING_DEPENDENCIES=true && mka $TARGET V=1
 
        - name: Upload recovery.img
          if: success()
