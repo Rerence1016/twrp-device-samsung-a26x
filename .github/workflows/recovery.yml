@@ -55,14 +55,8 @@ jobs:
 
        - name: Sync recovery source and device tree
          run: |
-             if [ ! -d "work"]; then
-               echo "No 'work' folder found"
-               mkdir work
-               cd work
-             else
-               echo "'work' folder found"
-               cd work
-             fi
+             mkdir work
+             cd work
              repo init -u $MANIFEST --depth=1
              repo sync -c -j4 --force-sync --no-clone-bundle --no-tags --optimized-fetch --prune --current-branch
              git clone $DT_LINK --depth=1 --single-branch $DT_PATH
